@@ -1,0 +1,151 @@
+<app-navbar-style-three [countOrders]="countOrders"></app-navbar-style-three>
+<section class="checkout-area ptb-100" style="background: url('assets/img/fon.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;">
+<div class="page-title-area page-title-img-one"  style="background-image: url('assets/img/getOrder.png');
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;">
+    <div class="container">
+        <div class="page-title-item">
+            <h2 style="color: #ffbe00">Корзина</h2>
+            <ul>
+                <li><a routerLink="/" style="color: #ffbe00">Ваш заказ</a></li>
+                <li><i class='bx bx-chevron-right' ></i></li>
+                <li style="color: #ffbe00">Ништяк</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="container col-sm-3">
+<div class="container col-sm-3" style="margin-top: 13px; margin-bottom: 15px;">
+        <form class="checkout-item">
+            <div class="total-shopping">
+                <h4>Введите номер телефона:</h4>
+                <h3><input type="text"  placeholder="+7(900)" [value]="telephone" style="width: 100%;margin-bottom: 10px;"
+                           class="shadow-lg bg-white rounded" (input)="ChangeText($event)"></h3>
+            </div>
+        </form>
+
+</div>
+
+    <div class="container col-sm-3" style="margin-top: 13px; margin-bottom: 15px">
+        <form class="checkout-item">
+            <div class="total-shopping">
+                <h4>Заказ на сумму</h4>
+                <h3 style="margin-left: 2px;
+    margin-bottom: 20%; color: #ffbe00">{{Coupon.totalPrice}} руб.</h3>
+            </div>
+        </form>
+    </div>
+
+    <div class="container col-sm-3" style="margin-top: 13px; margin-bottom: 15px">
+        <form class="checkout-item">
+            <div class="total-shopping">
+                <h4>Купоны и Скидки:</h4>
+                <h3 *ngIf="Coupon.coupon">Купон № {{this.Coupon.coupon}} - 20%</h3>
+                <div class="form-check" *ngIf="Coupon.bonuses && !Coupon.coupon">
+                    <input class="form-check-input" style="width: 20px; height: 30px" type="checkbox"
+                           [checked]="isBonus"
+                           (change)="ChooseBonuses($event)" id="defaultCheck2">
+                    <label class="form-check-label"  style="font-size: 30px; margin-left: 6px; color: #ffbe00"
+                           for="defaultCheck2">
+                        Использовать бонусы - {{this.Coupon.bonuses}}
+                    </label>
+                </div>
+
+                <h3 style=" margin-left: 10px; margin-bottom: 10px" *ngIf="!Coupon.bonuses && !Coupon.coupon">Для расчета скидки введите номер телефона</h3>
+            </div>
+        </form>
+
+    </div>
+    </div>
+        <div class="col-sm-6" style="padding: 0;margin-top: 13px; margin-left: 25px;
+max-width: 500px;" *ngIf="flagAddress">
+            <div class="checkout-item">
+                <div class="card-header">
+                    <div class="form-check">
+                        <input class="form-check-input" style="width: 20px; height: 30px" type="checkbox"
+                        [(ngModel)]="selfPicked"
+                               (ngModelChange)="ChangDelivery()" id="defaultCheck1">
+                        <label class="form-check-label" style="font-size: 30px; margin-left: 6px" for="defaultCheck1">
+                            Самовывоз (скидка 10%)
+                        </label>
+                    </div>
+                    <form [formGroup]="formAddress" (ngSubmit)="onSubmit()" *ngIf="!selfPicked"
+                          class="needs-validation user-add" novalidate="">
+                        <h4>Заполните следующие поля</h4>
+                        <div class="form-group row">
+                            <label for="validationCustom1" class="col-xl-3 col-md-4"><span>*</span>Адрес доставки</label>
+                            <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom1" formControlName="address"
+                                   type="text" required="">
+                        </div>
+                        <div class="form-group row">
+                            <label for="validationCustom2" class="col-xl-3 col-md-4">
+                                    Дом</label>
+                            <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom2"
+                                   type="text" required="" formControlName="house">
+                        </div>
+                        <div class="form-group row">
+                            <label for="validationCustom3" class="col-xl-3 col-md-4">
+                              Квартира</label>
+                            <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom3"
+                                   type="number" required="" formControlName="apartment">
+                        </div>
+                        <div class="form-group row">
+                            <label for="validationCustom4" class="col-xl-3 col-md-4">
+                                Подъезд</label>
+                            <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom4"
+                                   type="text" required="" formControlName="entrance" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="validationCustom4" class="col-xl-3 col-md-4">
+                                Этаж</label>
+                            <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom5"
+                                   type="text" required="" formControlName="floor" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="validationCustom4" class="col-xl-3 col-md-4">
+                                Код домофона </label><input class="form-control ng-pristine ng-valid ng-touched"
+                               id="validationCustom6" type="text" required="" formControlName="intercom" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="validationCustom4" class="col-xl-3 col-md-4">
+                                Комментарий </label><input class="form-control ng-pristine ng-valid ng-touched"
+                               id="validationCustom7" type="text" required="" formControlName="comment" />
+                        </div>
+                        <div class="form-group row" >
+                            <label for="validationCustom4" class="col-xl-3 col-md-4">
+                                Количество приборов</label><input class="form-control ng-pristine ng-valid ng-touched"
+                                                           id="validationCustom8" type="text" required="" formControlName="appliances" />
+                        </div>
+
+                        <div class="form-group row" >
+                            <label for="validationCustom4" class="col-sm-6">
+                                Выберите способ оплаты</label>
+                                                                    <select class="form-control ng-pristine ng-valid ng-touched"
+                                                                            formControlName="pay"   required="" [(ngModel)]="choose" >
+                                                                        <option style="color: black" *ngFor="let f of pays" [value]="f">{{f}}</option>
+                                                                    </select>
+
+                        </div>
+
+                        <div class="text-center" style="margin-bottom: 10px; margin-top: 25px">
+                            <button (click)="SendDelivery()" type="submit" class="btn cmn-btn">Заказать</button>
+                        </div>
+                    </form>
+                    <div class="text-center" style="margin-bottom: 10px; margin-top: 25px" *ngIf="selfPicked">
+                        <button (click)="SendDelivery()" type="submit" class="btn cmn-btn">Забираю!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+</section>

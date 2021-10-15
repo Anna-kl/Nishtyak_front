@@ -1,0 +1,26 @@
+-- тройной Join для этих трех таблиц
+
+select * from
+public.goods as g right join public.predict_sale as p 
+on g.good_id = p.good_id
+left join public.store as s on p.store_id = s.store_id
+
+-- среднее predict по store_id
+
+select avg(predict), store_id
+from public.predict_sale
+group by store_id
+
+-- среднее predict по departament
+
+select avg(predict), department_name
+from public.predict_sale join public.goods
+on public.predict_sale.good_id = public.goods.good_id
+group by public.goods.department_name
+
+-- неделю с максимальным показателем predict, после чего сделайте join с таблицей store
+
+select *
+from public.predict_sale left join public.store 
+on public.predict_sale.store_id = public.store.store_id
+where public.predict_sale.predict = (select max (predict) from public.predict_sale )

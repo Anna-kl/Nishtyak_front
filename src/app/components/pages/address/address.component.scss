@@ -1,0 +1,47 @@
+input:hover {
+color: black;
+}
+
+input {
+    color: black;
+}
+
+select.form-control.ng-pristine.ng-valid.ng-touched.ng-dirty:hover{
+    color:black;
+}
+
+select.form-control.ng-pristine.ng-valid.ng-touched.ng-dirty{
+    color:black;
+}
+
+h3{
+    color: #ffbe00;
+}
+
+h4 {
+    text-align: center;
+    //font-size: 35px;
+    margin-bottom: 0px;
+    background-color: #ffbe00;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+@media screen and (min-width : 892px) and (max-width : 1899px) {
+
+    .col-sm-3 {
+        flex: 0 0 100%;
+    }
+
+    .row {
+        display: inline-flex;
+    }
+
+}
+.container, .container-fluid, .container-xl, .container-lg, .container-md, .container-sm {
+    margin-right: 3px;
+    margin-left: 3px;
+    max-width: 400px;
+}
+

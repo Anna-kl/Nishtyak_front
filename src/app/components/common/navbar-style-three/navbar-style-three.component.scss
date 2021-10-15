@@ -1,0 +1,12 @@
+ng::ng-deep a.nav-cart {
+    margin-right: 15px;
+}
+
+
+ng::ng-deep .fixed-top {
+    /* position: fixed; */
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}

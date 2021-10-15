@@ -1,0 +1,25 @@
+
+<html>
+<head>
+    <title>JetBrains Account :: Error 400: Bad Request</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="stylesheet" type="text/css" href="https://resources.jetbrains.com/storage/ui/fonts/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/error-pages.css"/>
+</head>
+<body onunload=";">
+
+<div class="topHeader">
+    <div class="container"><a class="logo" href="https://www.jetbrains.com/">JetBrains</a></div>
+</div>
+
+<div class="grid980">
+    <div class="title">Error 400: Bad Request</div>
+    <p>
+        Oops... Your browser sent a request that server could not understand because of syntax error.
+    </p>
+    <p>
+        Please check the URL you have typed or try starting <a href="">from the index page</a>. If the problem persists please contact <a href="mailto:support-int@jetbrains.com">support-int@jetbrains.com</a>
+    </p>
+</div>
+</body>
+</html>

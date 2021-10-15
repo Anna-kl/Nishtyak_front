@@ -1,0 +1,74 @@
+<app-navbar-style-three></app-navbar-style-three>
+
+<div class="page-title-area page-title-img-one"
+     style="background-image: url(assets/img/акции.png); background-size: contain;">
+    <div class="container">
+<!--        <div class="page-title-item">-->
+<!--&lt;!&ndash;            <h2>Выгода просто "Ништяк"</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;            <ul>&ndash;&gt;-->
+<!--&lt;!&ndash;                <li><a routerLink="/">Акции</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                <li><i class='bx bx-chevron-right'></i></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                <li>Выгодные предложения</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            </ul>&ndash;&gt;-->
+<!--        </div>-->
+    </div>
+</div>
+
+<section class="collection-area collection-area-two pt-100 pb-70">
+    <div class="container">
+        <div class="section-title">
+            <h2>Наши акции</h2>
+            <p>Всегда выгодные предложения</p>
+        </div>
+
+<!--        <div class="sorting-menu">-->
+<!--            <ul>-->
+<!--&lt;!&ndash;               <li class="filter active" data-filter="all">All</li>&ndash;&gt;-->
+<!--               <li class="filter active" data-filter=".web">Роллы</li>-->
+<!--               <li class="filter" data-filter=".ui">Комбо</li>-->
+<!--               <li class="filter" data-filter=".ux">Напитки</li>-->
+<!--&lt;!&ndash;               <li class="filter" data-filter=".branding">Asian Food</li>&ndash;&gt;-->
+<!--            </ul>-->
+<!--        </div>-->
+
+
+        <div id="Container" class="row">
+            <ng-container *ngFor ="let stock of stocks">
+
+                <div class="col-sm-6 col-lg-4 mix web ui">
+                    <div class="collection-item">
+                        <div class="collection-top">
+                            <img [src]="stock.icon" alt="4 в подарок">
+                            <ul>
+                                <li><i class='bx bxs-star checked'></i></li>
+                                <li><i class='bx bxs-star checked'></i></li>
+                                <li><i class='bx bxs-star checked'></i></li>
+                                <li><i class='bx bxs-star checked'></i></li>
+                                <li><i class='bx bxs-star checked'></i></li>
+                            </ul>
+<!--                            <div class="add-cart">-->
+<!--                                <a routerLink="/cart"><i class='bx bxs-cart'></i> Add to Cart</a>-->
+<!--                            </div>-->
+                        </div>
+
+                        <div class="collection-bottom">
+                            <h3>{{stock.name}}</h3>
+                            <!--                        <ul>-->
+                            <!--                            <li><span>$25</span></li>-->
+                            <!--                            <li>-->
+                            <!--                                <div class="number">-->
+                            <!--                                    <span class="minus">-</span>-->
+                            <!--                                    <input type="text" class="form-control" value="1"/>-->
+                            <!--                                    <span class="plus">+</span>-->
+                            <!--                                </div>-->
+                            <!--                            </li>-->
+                            <!--                        </ul>-->
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>
+
+<app-footer-style-two></app-footer-style-two>

@@ -1,0 +1,61 @@
+<app-navbar-style-three [countOrders]="countOrders"></app-navbar-style-three>
+
+<div class="page-title-area page-title-img-one"
+     style="background-image: url('assets/img/доставка.png');
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;">
+    <div class="container">
+        <div class="page-title-item">
+            <h2 style="color: black">Корзина</h2>
+            <ul>
+                <li><a routerLink="/" style="color: black">Ваш заказ</a></li>
+                <li><i class='bx bx-chevron-right' ></i></li>
+                <li style="color: black">Ништяк</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<section class="cart-area ptb-100"   style="background: url(assets/img/fon.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;">
+    <div class="container">
+        <div class="cart-wrap">
+            <table class="table" style="color: #a5a4a9">
+                <thead class="thead">
+                    <tr >
+                        <th class="table-head" scope="col">Название</th>
+                        <th class="table-head" scope="col">Кол</th>
+                        <th class="table-head" scope="col">Цена</th>
+                        <th class="table-head" scope="col">Удалить</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <th class="table-item">{{product.name}}</th>
+                        <td>{{product.count}}</td>
+                        <td>{{product.price*product.count}}</td>
+                        <td><a (click)="DeleteProduct(product)"><i class='bx bx-x'></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="shop-back">
+                <a routerLink="/checkout">Продолжим?</a>
+            </div>
+
+            <div class="total-shopping">
+                <h2>Заказ на сумму</h2>
+                <h3><span>{{totalPrice}}</span></h3>
+                <a  (click)="SendBacket()">Указать адрес доставки</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer-style-two></app-footer-style-two>
