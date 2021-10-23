@@ -27,6 +27,7 @@ export class NavbarStyleThreeComponent implements OnChanges, OnInit {
       if (count === ''){
           this.countOrders = 0;
       } else{
+          // tslint:disable-next-line:radix
           this.countOrders = Number.parseInt(count);
       }
     }
@@ -35,7 +36,4 @@ export class NavbarStyleThreeComponent implements OnChanges, OnInit {
        this.ngOnInit();
     }
 
-    RouteSale() {
-        this.router.navigate(['/food-collection']);
-    }
 }

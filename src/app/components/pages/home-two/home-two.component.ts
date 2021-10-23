@@ -9,6 +9,7 @@ import {BacketServices} from '../../services/backet.service';
 import {IOrder, Order} from '../../classes/IOrder';
 import {DataServices} from '../../services/data.service';
 import Swal from 'sweetalert2';
+import {ProductWithCount} from '../../classes/ProductWithCount';
 
 @Component({
   selector: 'app-home-two',
@@ -27,11 +28,15 @@ export class HomeTwoComponent implements OnInit {
               private cookieService: CookieService,
               private md5: Md5, private backetService: BacketServices) { }
 
-  public products: Product[];
+  public products: ProductWithCount[];
+  public countProduct = 1;
   ngOnInit(): void {
       this.productService.getProducts().
           subscribe((result: Response) => {
-                this.products = result.data as Product[];
+                this.products = result.data as ProductWithCount[];
+                this.products.forEach(item => {
+                    item.count = 1;
+                });
       });
       this.session = this.cookieService.get('hichtyak_backet');
       if (this.session !== ''){
@@ -50,14 +55,15 @@ export class HomeTwoComponent implements OnInit {
         this.typeProduct = type;
     }
 
-    addProduct(product: Product) {
+    addProduct(product: ProductWithCount) {
         if (this.session === undefined || this.session === '') {
-            const hash2 = this.md5.appendStr('password').end().toString();
+            const hash2 = this.md5.appendStr(new Date().toISOString() + Math.random().toString()).end().toString();
             this.backet = new Backet(hash2, -1, 'active', 0, new Date());
             this.backetService.createBacket(this.backet).subscribe(
                 (result: Response) => {
                     if (result.code === 200) {
                         this.cookieService.set('hichtyak_backet', hash2);
+                        this.session = hash2;
                         const idBacket = result.data;
                         this.addOrder(product, idBacket);
                     }
@@ -67,7 +73,7 @@ export class HomeTwoComponent implements OnInit {
             this.backetService.getIdBacket(this.session).subscribe(
                 (result: Response) => {
                     if (result.code === 200) {
-                        const idBacket = Number.parseInt(result.data);
+                        const idBacket = result.data;
                         this.addOrder(product, idBacket);
 
                     } else {
@@ -85,8 +91,8 @@ export class HomeTwoComponent implements OnInit {
         }
     }
 
-    addOrder(product: Product, idBacket: number){
-        const order = new Order(new Date(), product.id, idBacket, 1);
+    addOrder(product: ProductWithCount, idBacket: number){
+        const order = new Order(new Date(), product.id, idBacket, product.count);
         this.productService.addProductInBacket(order).subscribe(
             (result: Response) => {
                 if (result.code === 200) {
@@ -108,4 +114,16 @@ export class HomeTwoComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
         }); }
+
+    Plus(product: ProductWithCount) {
+        product.count += 1;
+    }
+
+    Minus(product: ProductWithCount) {
+            product.count -= 1;
+    }
+
+    ChangeCount(product: ProductWithCount) {
+        console.log(product);
+    }
 }

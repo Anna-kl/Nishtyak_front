@@ -35,6 +35,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { AccountComponent } from './components/pages/account/account.component';
 import {DataServices} from './components/services/data.service';
 import { AddressComponent } from './components/pages/address/address.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { AddressComponent } from './components/pages/address/address.component';
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
   providers: [DataServices],
   bootstrap: [AppComponent]

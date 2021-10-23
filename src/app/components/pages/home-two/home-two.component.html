@@ -148,7 +148,7 @@ background-size: contain">
                     <img src="assets/img/home-one/services3.png" alt="services-image">
                     <img class="service-shape" src="assets/img/home-one/services-shape.png" alt="services-image">
                     <h3>Скидки и купоны</h3>
-                    <p>За все покупки, которые вы совершаете в нашем кафе, через сайт и социальные сети мы возвращаем 5% кешбек</p>
+                    <p>За все покупки, которые вы совершаете в нашем кафе, через сайт и социальные сети мы возвращаем 5% баллами</p>
                 </a>
             </div>
         </div>
@@ -201,9 +201,10 @@ background-size: contain">
                             <li><span>{{product.price}}</span></li>
                             <li>
                                 <div class="number">
-                                    <span class="minus">-</span>
-                                    <input type="text" class="form-control" value="1"/>
-                                    <span class="plus">+</span>
+                                    <span class="minus" (click)="Minus(product)">-</span>
+                                    <input type="text" class="form-control"
+                                           [(ngModel)]="product.count" (ngModelChange)="ChangeCount(product)"/>
+                                    <span class="plus" (click)="Plus(product)">+</span>
                                 </div>
                             </li>
                         </ul>

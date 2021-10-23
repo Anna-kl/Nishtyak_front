@@ -84,70 +84,61 @@ export class AddressComponent implements OnInit {
   }
 
     onSubmit() {
-        const data  = this.formAddress.getRawValue() as InfoOrder;
-        data.idBacket = this.idBacket;
-        let send;
-        if (!this.Coupon.coupon) {
-            send = new SendOrder(data, this.idUser, this.Coupon.totalPrice, this.selfPicked, 'coupon');
-        }
-        else{
-            send = new SendOrder(data, this.idUser, this.Coupon.totalPrice, this.selfPicked, null);
-        }
-        this.backetService.createOrder(send).subscribe(
-            (result: Response) => {
-
-            }
-        );
+       this.SendDelivery();
     }
 
-    ChangeText($event: Event) {
-      if ($event['data'] === null) {
-          this.telephone = this.telephone.substr(0, this.telephone.length - 1);
-      } else {
-          this.telephone += $event['data'];
-      }
-      if (this.telephone.length === 1){
-        if (this.telephone[0] === '8' || this.telephone[0] === '7' || this.telephone[0] === '+'){
-            this.telephone = '+7(';
-        } else {
-            this.telephone = '+7(' + $event['data'];
-        }
-      }
-      if (this.telephone.length === 6){
-                this.telephone += ')';
-      }
-      if (this.telephone.length >= 14){
-          this.flagAddress = true;
-          this.userService.getAddress(this.telephone).subscribe(
-              (result: Response) => {
-                  if (result.code === 404){
-                      this.idUser = result.data;
-                  } else {
-                      const sendOrder = result.data as SendOrder;
-                      this.formAddress = this.formBuilder.group(
-                          {
-                              address: sendOrder.address,
-                              house: sendOrder.house,
-                              apartment: sendOrder.apartment,
-                              floor: sendOrder.floor,
-                              intercom: sendOrder.intercom,
-                              entrance: sendOrder.entrance,
-                              comment: [''],
-                              appliances: [1],
-                              pay: [this.choose]
-                          }
-                      );
-                      this.idUser = sendOrder.idUser;
-                  }
-                  this.backetService.getTotalPrice(
+    ChangeText($selected: any) {
+        const data = $selected.target.value;
+        if (this.telephone.length < data.length) {
+            if (data.length === 1 || data.length === 6) {
+                if (data === '8' || data === '7' || data === '+') {
+                    this.telephone = '+7(';
+                } else if (data.length === 1) {
+                    this.telephone = '+7(' + data;
+                }
+                if (data.length === 6) {
+                    this.telephone = data + ')';
+                }
+            } else {
+                this.telephone = data;
+            }
+
+            if (data.length >= 14) {
+                this.flagAddress = true;
+                this.userService.getAddress(this.telephone).subscribe(
+                    (result: Response) => {
+                        if (result.code === 404) {
+                            this.idUser = result.data;
+                        } else {
+                            const sendOrder = result.data as SendOrder;
+                            this.formAddress = this.formBuilder.group(
+                                {
+                                    address: sendOrder.address,
+                                    house: sendOrder.house,
+                                    apartment: sendOrder.apartment,
+                                    floor: sendOrder.floor,
+                                    intercom: sendOrder.intercom,
+                                    entrance: sendOrder.entrance,
+                                    comment: [''],
+                                    appliances: [1],
+                                    pay: [this.choose]
+                                }
+                            );
+                            this.idUser = sendOrder.idUser;
+                        }
+                        this.backetService.getTotalPrice(
                             new GetPrice(this.idBacket, this.idUser, false)).subscribe(
                             (resultPrice: Response) => {
-                                    this.Coupon = resultPrice.data as ICoupon;
+                                this.Coupon = resultPrice.data as ICoupon;
                             }
                         );
-                  });
-              }
-      }
+                    });
+            }
+        } else {
+            this.telephone = data;
+        }
+
+    }
 
     ChooseBonuses($event: Event) {
         this.isBonus = !this.isBonus;
@@ -160,11 +151,7 @@ export class AddressComponent implements OnInit {
     }
 
     ChangDelivery() {
-      // if (this.selfPicked){
-      //     this.flagAddress = false;
-      // } else {
-      //     this.flagAddress = true;
-      // }
+        console.log(this.selfPicked);
     }
 
     SendDelivery() {
@@ -194,6 +181,11 @@ export class AddressComponent implements OnInit {
                       this.cookieService.delete('hichtyak_backet');
                       this.cookieService.delete('nishtyak_count');
                       this.router.navigate(['/']);
+                  } else {
+                      this.error();
+                      this.cookieService.delete('hichtyak_backet');
+                      this.cookieService.delete('nishtyak_count');
+                      this.router.navigate(['/']);
                   }
               }
           );
@@ -218,7 +210,7 @@ export class AddressComponent implements OnInit {
         Swal.fire({
             icon: 'error',
             title: 'Упсс...',
-            text: 'Укажите номер телефона',
+            text: 'С вами свяжется менеджер для уточнения заказа',
         });
     }
 }
