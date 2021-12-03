@@ -17,10 +17,10 @@ import {Router} from '@angular/router';
 export class CartComponent implements OnInit {
 
   private idBacket = 0;
-  public products: IOrder[];
-  public totalPrice: number;
-  public session: string;
-  public countOrders: number;
+  public products: IOrder[] | undefined;
+  public totalPrice: number | undefined;
+  public session: string | undefined;
+  public countOrders: number = 0;
   constructor(private backetService: BacketServices,
               private cookieService: CookieService,
               private router: Router,
@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
           this.countOrders = 0;
       } else {
           this.backetService.getCountOrders(this.session).subscribe(
-              (result: Response) => {
+              (result: any) => {
                   if (result.code === 200) {
                       this.countOrders = result.data;
                   }
@@ -41,12 +41,12 @@ export class CartComponent implements OnInit {
       }
       if (this.session !== ''){
             this.backetService.getIdBacket(this.session).subscribe(
-                (resultBacket: Response) => {
+                (resultBacket: any) => {
                     this.idBacket = resultBacket.data;
                 }
             );
             this.backetService.getListProducts(this.session).subscribe(
-                (result: Response) => {
+                (result: any) => {
                     if (result.code === 200){
                         this.products = result.data as IOrder[];
                         this.totalPrice = this.products.reduce((sum, a) =>
@@ -59,13 +59,13 @@ export class CartComponent implements OnInit {
   }
 
     DeleteProduct(product: IOrder) {
-        this.products = this.products.filter(x => x !== product);
+        this.products = this.products!.filter(x => x !== product);
         const send = {idBacket: product.idBacket, idProduct: product.idProduct, dttmAdd: product.dttmAdd,
         id: product.id};
         this.backetService.deleteOrder(send).subscribe(
-            (result: Response) => {
+            (result: any) => {
                 if (result.code === 200){
-                    this.totalPrice = this.products.reduce((sum, a) =>
+                    this.totalPrice = this.products!.reduce((sum, a) =>
                         sum + a.price * a.count, 0);
                 }
             }
@@ -73,11 +73,11 @@ export class CartComponent implements OnInit {
     }
 
     SendBacket() {
-      const backet = new Backet(this.session, -1, 'preorder', this.totalPrice, new Date());
-      this.dataService.sendPriceBacket(this.totalPrice);
+      const backet = new Backet(this.session!, -1, 'preorder', this.totalPrice!, new Date());
+      this.dataService.sendPriceBacket(this.totalPrice!);
       this.dataService.sendIdBacket(this.idBacket);
       this.backetService.createBacket(backet).subscribe(
-          (result: Response) => {
+          (result: any) => {
               if (result.code === 200){
                   this.router.navigate(['/address']);
               }

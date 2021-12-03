@@ -26,7 +26,7 @@ import {AddressComponent} from './components/pages/address/address.component';
 
 const routes: Routes = [
     {path: '', component: HomeTwoComponent},
-    // {path: 'home-two', component: HomeTwoComponent},
+    {path: 'home-two', component: HomeOneComponent},
     // {path: 'home-three', component: HomeThreeComponent},
     {path: 'about', component: AboutComponent},
     {path: 'categories', component: CategoriesComponent},

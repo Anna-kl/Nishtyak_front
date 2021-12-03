@@ -3854,3 +3854,9 @@ button {
     box-shadow: 0px 0px 14px 0px $black-color;
 }
 /*----- End Back to Top CSS -----*/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

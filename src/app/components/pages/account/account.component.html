@@ -50,7 +50,7 @@
                             <div class="form-group row">
                                 <label for="validationCustom17" class="col-xl-3 col-md-4"><span>*</span>
                                     Купон</label>
-                                <input class="form-control col-xl-8 col-md-7" id="validationCustom17" disabled
+                                <input class="form-control col-xl-8 col-md-7" id="validationCustom17"
                                        type="text" required="" formControlName="coupon">
                             </div>
                             <div class="text-center">
@@ -70,8 +70,8 @@
                     <div class="card-body">
                         <div class="profile-details text-center">
 
-                            <h2>{{this.user.name}}</h2>
-                            <span style="color: #ffbe00; font-size: 25px">{{this.user.email}}</span>
+                            <h2>{{this.user?.name}}</h2>
+                            <span style="color: #ffbe00; font-size: 25px">{{this.user?.email}}</span>
 
                         </div>
                         <hr>
@@ -116,19 +116,19 @@
                                     <tbody>
                                     <tr>
                                         <td>Имя:</td>
-                                        <td>{{this.user.name}}</td>
+                                        <td>{{this.user?.name}}</td>
                                     </tr>
                                     <tr>
                                         <td>Email:</td>
-                                        <td>{{this.user.email}}</td>
+                                        <td>{{this.user?.email}}</td>
                                     </tr>
                                     <tr>
                                         <td>Телефон:</td>
-                                        <td>{{this.user.phone}}</td>
+                                        <td>{{this.user?.phone}}</td>
                                     </tr>
                                     <tr>
                                         <td>Купон:</td>
-                                        <td>{{this.user.coupon}}</td>
+                                        <td>{{this.user?.coupon}}</td>
                                     </tr>
 
 

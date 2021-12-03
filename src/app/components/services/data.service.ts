@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class DataServices {
-    private user = new BehaviorSubject<string>(null);
+    private user = new BehaviorSubject<string|null>(null);
     private userpic = new BehaviorSubject<any>(null);
     private backet = new BehaviorSubject<any>(null);
     private id = new BehaviorSubject<any>(null);

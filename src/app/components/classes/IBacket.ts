@@ -1,10 +1,9 @@
 export class Backet {
-    id: number;
+    id: number | undefined;
     dttmCreate: Date;
     session: string;
     idUser: number;
     status: string;
-    dttmClose: Date;
     price: number;
     constructor(session: string, idUser: number, status: string, price: number,
                 dttmCreate: Date ) {

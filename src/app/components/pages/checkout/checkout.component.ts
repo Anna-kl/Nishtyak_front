@@ -15,7 +15,6 @@ import {DataServices} from '../../services/data.service';
 export class CheckoutComponent implements OnInit {
 
   public flagcod = false;
-  public loginForm: FormGroup;
   public error = false;
   public smstext = 'Телефон введен неверно';
   public errorsms = false;
@@ -25,6 +24,7 @@ export class CheckoutComponent implements OnInit {
   public errorSmsText = '';
   public errorTimeFlag = false;
   private interval: any;
+  public loginForm: any;
   constructor(private formBuilder: FormBuilder, private authServices: AuthServices,
               private router: Router, private dataservices: DataServices) { }
 
@@ -33,14 +33,16 @@ export class CheckoutComponent implements OnInit {
           phone: new FormControl(),
           code: new FormControl()
       });
+      // @ts-ignore
       this.loginForm.get('phone').valueChanges.subscribe(x => {
+          // @ts-ignore
           let phone = this.loginForm.get('phone').value;
           if (phone.length === 1){
               phone = '+7(';
-              this.loginForm.patchValue({phone});
+              this.loginForm!.patchValue({phone});
           } else if (phone.length === 6){
               phone = phone + ')';
-              this.loginForm.patchValue({phone});
+              this.loginForm!.patchValue({phone});
           } else if (phone.length > 14) {
               this.error = true;
           }
@@ -64,7 +66,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     TokensData() {
-        const temp = this.loginForm.getRawValue();
+        const temp = this.loginForm!.getRawValue();
         clearInterval(this.interval);
 
         if (!this.flagcod){
@@ -73,7 +75,7 @@ export class CheckoutComponent implements OnInit {
             this.timeLeft = 60;
             this.startTimer();
             this.authServices.register(temp['phone']).subscribe(
-                (result: Response) => {
+                (result: any) => {
                     if (result.code !== 500 && result.code !== 400) {
                         this.flagcod = true;
                         this.flagRegister = result.code;
@@ -85,7 +87,7 @@ export class CheckoutComponent implements OnInit {
             );
         } else {
             this.authServices.checkCode(temp['phone'], temp['code'])
-                .subscribe((result: Response) => {
+                .subscribe((result: any) => {
                    if (result.code === 200){
                        this.dataservices.SendToken(result.data);
                        if (this.flagRegister === 201) {

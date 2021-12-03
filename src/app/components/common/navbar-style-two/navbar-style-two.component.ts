@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class NavbarStyleTwoComponent implements OnInit, OnChanges  {
 
   // public countOrders = 0;
-  @Input() countOrders;
+  @Input() countOrders: string | number | undefined;
   constructor(private cookieService: CookieService,
               private backetService: BacketServices,
               private router: Router) { }

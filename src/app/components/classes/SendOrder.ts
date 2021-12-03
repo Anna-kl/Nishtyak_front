@@ -11,9 +11,9 @@ export class SendOrder {
     pay: string;
     idBacket: number;
     totalPrice: number;
-    sale: string;
+    sale: string|null;
     appliances: number;
-    constructor(address: any, idUser: number, totalPrice: number, selfPickup: boolean, sale: string) {
+    constructor(address: any, idUser: number, totalPrice: number, selfPickup: boolean, sale: string| null) {
         this.address = address.address;
         this.pay = address.pay;
         this.idUser = idUser;

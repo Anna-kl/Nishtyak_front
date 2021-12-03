@@ -27,11 +27,11 @@ export class AddressComponent implements OnInit {
   public flagAppliances = false;
   public choose = 'Оплата картой';
   public pays = ['Наличными', 'Картой курьеру'];
-  public idBacket: number;
-  public idUser: number;
-  public selfPicked = false;
   public isBonus = false;
   public countOrders = 0;
+  idBacket: any;
+  private idUser: any;
+  public selfPicked = false;
 
   constructor(private userService: AuthServices,
               private formBuilder: FormBuilder,
@@ -41,9 +41,8 @@ export class AddressComponent implements OnInit {
               private dataService: DataServices) {
       this.Coupon = {
           coupon: null,
-          bonuses: 0,
+          bonuses: -1,
           totalPrice: 0,
-
       };
   }
 
@@ -54,11 +53,12 @@ export class AddressComponent implements OnInit {
       } else {
           this.countOrders = Number.parseInt(count);
       }
+
       this.dataService.Id.subscribe(
           result => {
               this.idBacket = result;
-              this.backetService.getTotalPrice(new GetPrice(this.idBacket, null, false)).subscribe(
-                  (resultPrice: Response) => {
+              this.backetService.getTotalPrice(new GetPrice(this.idBacket, -1, false, this.selfPicked)).subscribe(
+                  (resultPrice: any) => {
                       if (resultPrice.code === 200){
                           this.Coupon = resultPrice.data as ICoupon;
 
@@ -106,7 +106,7 @@ export class AddressComponent implements OnInit {
             if (data.length >= 14) {
                 this.flagAddress = true;
                 this.userService.getAddress(this.telephone).subscribe(
-                    (result: Response) => {
+                    (result: any) => {
                         if (result.code === 404) {
                             this.idUser = result.data;
                         } else {
@@ -127,8 +127,8 @@ export class AddressComponent implements OnInit {
                             this.idUser = sendOrder.idUser;
                         }
                         this.backetService.getTotalPrice(
-                            new GetPrice(this.idBacket, this.idUser, false)).subscribe(
-                            (resultPrice: Response) => {
+                            new GetPrice(this.idBacket, this.idUser, false, this.selfPicked)).subscribe(
+                            (resultPrice: any) => {
                                 this.Coupon = resultPrice.data as ICoupon;
                             }
                         );
@@ -143,15 +143,20 @@ export class AddressComponent implements OnInit {
     ChooseBonuses($event: Event) {
         this.isBonus = !this.isBonus;
         this.backetService.getTotalPrice(
-            new GetPrice(this.idBacket, this.idUser, this.isBonus)).subscribe(
-            (resultPrice: Response) => {
+            new GetPrice(this.idBacket, this.idUser, this.isBonus, this.selfPicked)).subscribe(
+            (resultPrice: any) => {
                 this.Coupon = resultPrice.data as ICoupon;
             }
         );
     }
 
     ChangDelivery() {
-        console.log(this.selfPicked);
+        this.backetService.getTotalPrice(
+            new GetPrice(this.idBacket, this.idUser, this.isBonus, this.selfPicked)).subscribe(
+            (resultPrice: any) => {
+                this.Coupon = resultPrice.data as ICoupon;
+            }
+        );
     }
 
     SendDelivery() {
@@ -174,7 +179,7 @@ export class AddressComponent implements OnInit {
               }
           }
           this.backetService.createOrder(send).subscribe(
-              (result: Response) => {
+              (result: any) => {
                   if (result.code === 201) {
                       const order = result.data as AnswerOrder;
                       this.Success(order);

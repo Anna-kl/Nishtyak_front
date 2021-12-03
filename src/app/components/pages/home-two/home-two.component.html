@@ -1,7 +1,7 @@
 <app-navbar-style-two #navMenu [countOrders]="orderCount"></app-navbar-style-two>
 
 <div class="banner-area-two"
-     style="background: url(assets/img/fon.jpg) no-repeat center center fixed;
+     style="background: url('assets/img/menu/sets/Сет Лакшери.jpeg') no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -13,10 +13,9 @@
 <!--    </div>-->
 
     <div class="container">
-        <div class="banner-content" style="background-image: url('assets/img/main_foto.jpg');
-background-size: contain">
-            <h1>Авторская кухня</h1>
-            <p>Мы любим свое дело!</p>
+        <div class="banner-content" >
+            <h1>Скидка до 20% на меню!</h1>
+            <p style="font-size: 35px">Кэшбэк на все 5%</p>
 <!--            <div class="banner-btn-wrap">-->
 <!--                <a class="cmn-btn" routerLink="/online-order">Order Now</a>-->
 <!--                <a class="banner-btn-two" routerLink="/contact">Get Free Call</a>-->
@@ -24,7 +23,7 @@ background-size: contain">
         </div>
 
 <!--        <div class="banner-img">-->
-<!--            <img src="assets/img/main_rolls.jpg" alt="Banner">-->
+<!--            <img src="assets/img/mainImg.png" alt="Banner">-->
 <!--        </div>-->
     </div>
 </div>
@@ -171,7 +170,12 @@ background-size: contain">
                <li class="filter active" (click)="setProduct('rolls')">Роллы</li>
                 <li class="filter" (click)="setProduct('sets')">Сеты</li>
                <li class="filter" (click)="setProduct('burger')">Бургеры</li>
+                <li class="filter" (click)="setProduct('pizza')">Пицца</li>
                 <li class="filter" (click)="setProduct('snack')">Закуски</li>
+                <li class="filter" (click)="setProduct('soup')">Супы</li>
+                <li class="filter" (click)="setProduct('wok')">Wok</li>
+                <li class="filter" (click)="setProduct('sauce')">Соусы</li>
+                <li class="filter" (click)="setProduct('drink')">Напитки</li>
             </ul>
         </div>
 
@@ -181,13 +185,10 @@ background-size: contain">
                 <div class="collection-item">
                     <div class="collection-top">
                         <img [src]="product.icon" alt="Collection">
-                        <ul>
-                            <li><i class='bx bxs-star checked'></i></li>
-                            <li><i class='bx bxs-star checked'></i></li>
-                            <li><i class='bx bxs-star checked'></i></li>
-                            <li><i class='bx bxs-star checked'></i></li>
-                            <li><i class='bx bxs-star checked'></i></li>
-                        </ul>
+                        <span *ngIf="product.sale !== 0" class="iconify" style="position: absolute; left:0;color: red;" data-icon="foundation:burst-sale" data-width="50" data-height="50"></span>
+<!--                        <ul>-->
+<!--                            <li><span class="iconify" data-icon="foundation:burst-sale" style="color: red;" data-width="50" data-height="50"></span></li>-->
+<!--                        </ul>-->
                         <div class="add-cart">
                             <a (click)="addProduct(product)">
                                 <i class='bx bxs-cart'></i> Добавить в корзину</a>
@@ -195,11 +196,18 @@ background-size: contain">
                     </div>
 
                     <div class="collection-bottom">
-                        <h3>{{product.name}}</h3>
+                     <div>   <h3>{{product.name}}</h3>   <span style="color:#c3a2a2" *ngIf="product.tag==='pizza'">{{product.quantity}} см</span></div>
                         <span class="text-body" style="white-space: pre-wrap">{{product.structure}}</span>
                         <ul>
-                            <li><span>{{product.price}}</span></li>
+                            <li><span>{{product.price}}</span>
+
                             <li>
+                            <li *ngIf="product.sale !== 0"><span
+                                style="text-decoration: line-through; color: #c3a2a2;
+                                 font-style: italic">{{product.sale}}</span>
+
+                            <li>
+
                                 <div class="number">
                                     <span class="minus" (click)="Minus(product)">-</span>
                                     <input type="text" class="form-control"
@@ -213,6 +221,16 @@ background-size: contain">
             </div>
             </ng-container>
         </div>
+
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h5 class="modal-title f-w-600" id="exampleModalLabel">Управление услугами</h5>
+                <button type="button" class="close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </ng-template>
 
 <!--        <div class="more-collection">-->
 <!--            <a routerLink="/food-collection">View More Colletction</a>-->

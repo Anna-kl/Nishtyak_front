@@ -12,8 +12,17 @@ export  class ProductServices {
     constructor(private http: HttpClient) {
 
     }
+
+    getProductsOptional(id: number){
+        return this.http.get(`${this.url}getOptionalProduct/${id}`);
+    }
+
     getProducts(){
         return this.http.get(`${this.url}product`);
+    }
+
+    checkOptional(id: number){
+        return this.http.get(`${this.url}checkProduct/${id}`);
     }
 
     getStock(){

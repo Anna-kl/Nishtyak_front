@@ -1,14 +1,16 @@
 export class Order {
-    id: number;
+    id: number | undefined;
     dttmAdd: Date;
     idProduct: number;
     idBacket: number;
     count: number;
-    constructor(dttmAdd: Date, idProduct: number, idBacket: number, count: number) {
+    price: number;
+    constructor(dttmAdd: Date, idProduct: number, idBacket: number, count: number, price: number) {
         this.dttmAdd = dttmAdd;
         this.idBacket = idBacket;
         this.count = count;
         this.idProduct = idProduct;
+        this.price = price;
     }
 }
 

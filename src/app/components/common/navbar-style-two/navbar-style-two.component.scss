@@ -2,3 +2,6 @@ ng::ng-deep a.nav-cart {
     margin-right: 15px;
 }
 
+ng::ng-deep a.nav-link.active {
+    font-size: 30px;
+}

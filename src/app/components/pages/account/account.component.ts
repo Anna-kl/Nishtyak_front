@@ -14,12 +14,10 @@ import Swal from 'sweetalert2';
   providers: [AccountServices]
 })
 export class AccountComponent implements OnInit {
-  staffForm: FormGroup;
-  paramUpdate: string;
-  idUser: number;
-  token: string;
-  accountForm: FormGroup;
-  user: User;
+  token: string | null = null;
+  public  accountForm: any;
+  user: User | undefined;
+  paramUpdate: any;
 
   constructor(private route: ActivatedRoute, private dataservices: DataServices,
               private accountService: AccountServices, private formBuilder: FormBuilder,
@@ -38,8 +36,8 @@ export class AccountComponent implements OnInit {
           this.paramUpdate = params['param'];
           this.dataservices.users.subscribe(result => this.token = result);
 
-          this.accountService.getAccount(this.token).subscribe(
-              (result: Response) => {
+          this.accountService.getAccount(this.token!).subscribe(
+              (result: any) => {
                   if (result.code === 200) {
                       this.user = result.data as User;
                       if (this.paramUpdate === 'update') {
@@ -67,12 +65,12 @@ export class AccountComponent implements OnInit {
         }); }
 
     onSubmitAccount() {
-        const data = this.accountForm.getRawValue();
+        const data = this.accountForm!.getRawValue();
         for (const res of Object.keys(data)) {
             Object(this.user)[res] = data[res] !== null ? data[res] : '';
         }
-        this.accountService.saveAccount(this.user, this.token).subscribe(
-            (result: Response) => {
+        this.accountService.saveAccount(this.user!, this.token!).subscribe(
+            (result: any) => {
                 if (result.code === 200){
                     this.position('Аккаунт обновлен');
                     this.router.navigate(['/account/show']);

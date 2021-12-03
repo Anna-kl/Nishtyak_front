@@ -49,7 +49,7 @@ background-size: cover;">
             <div class="total-shopping">
                 <h4>Купоны и Скидки:</h4>
                 <h3 *ngIf="Coupon.coupon">Купон № {{this.Coupon.coupon}} - 20%</h3>
-                <div class="form-check" *ngIf="Coupon.bonuses && !Coupon.coupon">
+                <div class="form-check" *ngIf="Coupon.bonuses !== null">
                     <input class="form-check-input" style="width: 20px; height: 30px" type="checkbox"
                            [checked]="isBonus"
                            (change)="ChooseBonuses($event)" id="defaultCheck2">
@@ -59,14 +59,13 @@ background-size: cover;">
                     </label>
                 </div>
 
-                <h3 style=" margin-left: 10px; margin-bottom: 10px" *ngIf="!Coupon.bonuses && !Coupon.coupon">Для расчета скидки введите номер телефона</h3>
+                <h3 style=" margin-left: 10px; margin-bottom: 10px" *ngIf="Coupon.bonuses === -1 || !Coupon.bonuses">Для расчета скидки введите номер телефона</h3>
             </div>
         </form>
 
     </div>
     </div>
-        <div class="col-sm-6" style="padding: 0;margin-top: 13px; margin-left: 5px;
-max-width: 500px;" *ngIf="flagAddress">
+        <div class="col-sm-6"  *ngIf="flagAddress">
             <div class="checkout-item">
                 <div class="card-header">
                     <div class="form-check">
@@ -77,39 +76,39 @@ max-width: 500px;" *ngIf="flagAddress">
                             Самовывоз (скидка 10%)
                         </label>
                     </div>
-                    <form [formGroup]="formAddress" (ngSubmit)="onSubmit()" *ngIf="!selfPicked"
+                    <form [formGroup]="formAddress" (ngSubmit)="onSubmit()"
                           class="needs-validation user-add" novalidate="">
                         <h4>Заполните следующие поля</h4>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="!selfPicked">
                             <label for="validationCustom1" class="col-xl-3 col-md-4"><span>*</span>Адрес доставки</label>
                             <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom1" formControlName="address"
                                    type="text" required="">
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="!selfPicked">
                             <label for="validationCustom2" class="col-xl-3 col-md-4">
                                     Дом</label>
                             <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom2"
                                    type="text" required="" formControlName="house">
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="!selfPicked">
                             <label for="validationCustom3" class="col-xl-3 col-md-4">
                               Квартира</label>
                             <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom3"
                                    type="number" required="" formControlName="apartment">
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="!selfPicked">
                             <label for="validationCustom4" class="col-xl-3 col-md-4">
                                 Подъезд</label>
                             <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom4"
                                    type="text" required="" formControlName="entrance" />
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="!selfPicked">
                             <label for="validationCustom4" class="col-xl-3 col-md-4">
                                 Этаж</label>
                             <input class="form-control ng-pristine ng-valid ng-touched" id="validationCustom5"
                                    type="text" required="" formControlName="floor" />
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="!selfPicked">
                             <label for="validationCustom4" class="col-xl-3 col-md-4">
                                 Код домофона </label><input class="form-control ng-pristine ng-valid ng-touched"
                                id="validationCustom6" type="text" required="" formControlName="intercom" />
@@ -125,7 +124,7 @@ max-width: 500px;" *ngIf="flagAddress">
                                                            id="validationCustom8" type="text" required="" formControlName="appliances" />
                         </div>
 
-                        <div class="form-group row" >
+                        <div class="form-group row" *ngIf="!selfPicked">
                             <label for="validationCustom4" class="col-sm-6">
                                 Выберите способ оплаты</label>
                                                                     <select class="form-control ng-pristine ng-valid ng-touched"
@@ -136,12 +135,13 @@ max-width: 500px;" *ngIf="flagAddress">
                         </div>
 
                         <div class="text-center" style="margin-bottom: 10px; margin-top: 25px">
-                            <button  type="submit" class="btn cmn-btn">Заказать</button>
+                            <button  type="submit" class="btn cmn-btn" style="background: #ffbe00;">Заказать</button>
                         </div>
                     </form>
-                    <div class="text-center" style="margin-bottom: 10px; margin-top: 25px" *ngIf="selfPicked">
-                        <button (click)="SendDelivery()" type="submit" class="btn cmn-btn">Забираю!</button>
-                    </div>
+<!--                    <div class="text-center" style="margin-bottom: 10px; margin-top: 25px" *ngIf="selfPicked">-->
+<!--&lt;!&ndash;                        <button (click)="SendDelivery()" type="submit"&ndash;&gt;-->
+<!--&lt;!&ndash;                               style="background: #ffbe00;" class="btn cmn-btn">Забираю!</button>&ndash;&gt;-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>

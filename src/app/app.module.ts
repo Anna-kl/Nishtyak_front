@@ -37,6 +37,12 @@ import {DataServices} from './components/services/data.service';
 import { AddressComponent } from './components/pages/address/address.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ChooseOptionalComponent } from './components/modals/choose-optional/choose-optional.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { OptionalComponent } from './components/pages/optional/optional.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -70,6 +76,8 @@ import { environment } from '../environments/environment';
     ContactComponent,
     NavbarStyleThreeComponent,
     AddressComponent,
+    ChooseOptionalComponent,
+    OptionalComponent,
   ],
     imports: [
         HttpClientModule,
@@ -78,6 +86,10 @@ import { environment } from '../environments/environment';
         ReactiveFormsModule,
         FormsModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        BrowserAnimationsModule,
+        NgbModule,
+    ],
+    exports: [
     ],
   providers: [DataServices],
   bootstrap: [AppComponent]

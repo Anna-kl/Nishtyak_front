@@ -11,13 +11,13 @@ import {ProductServices} from '../../services/product.service';
 })
 export class FoodCollectionComponent implements OnInit {
 
-    public stocks: IStock[];
+    public stocks: IStock[] = [];
 
   constructor(private productService: ProductServices) { }
 
   ngOnInit(): void {
       this.productService.getStock().
-      subscribe((result: Response) => {
+      subscribe((result: any) => {
           this.stocks = result.data as IStock[];
       });
   }

@@ -15,7 +15,7 @@ import {Router} from '@angular/router';
 export class NavbarStyleThreeComponent implements OnChanges, OnInit {
 
   @Input() countOrders = 0;
-  public test;
+  public test: any;
   constructor(private cookieService: CookieService,
               private dataService: DataServices,
               private backetService: BacketServices,

@@ -1,5 +1,5 @@
 export interface ICoupon {
-    coupon: number;
+    coupon: number|null;
     bonuses: number;
     totalPrice: number;
 }
