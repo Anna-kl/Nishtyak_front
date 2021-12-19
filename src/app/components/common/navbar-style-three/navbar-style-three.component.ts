@@ -15,7 +15,6 @@ import {Router} from '@angular/router';
 export class NavbarStyleThreeComponent implements OnChanges, OnInit {
 
   @Input() countOrders = 0;
-  public test: any;
   constructor(private cookieService: CookieService,
               private dataService: DataServices,
               private backetService: BacketServices,
@@ -23,13 +22,13 @@ export class NavbarStyleThreeComponent implements OnChanges, OnInit {
 
   }
     ngOnInit(){
-      const count = this.cookieService.get('nishtyak_count');
-      if (count === ''){
-          this.countOrders = 0;
-      } else{
-          // tslint:disable-next-line:radix
-          this.countOrders = Number.parseInt(count);
-      }
+      // const count = this.cookieService.get('nishtyak_count');
+      // if (count === ''){
+      //     this.countOrders = 0;
+      // } else{
+      //     // tslint:disable-next-line:radix
+      //     this.countOrders = Number.parseInt(count);
+      // }
     }
 
     ngOnChanges(changes: SimpleChanges) {

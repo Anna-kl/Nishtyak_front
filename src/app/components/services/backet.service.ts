@@ -30,7 +30,7 @@ export  class BacketServices {
         return this.http.get(`${this.url}getIdBacket/${session}`);
     }
 
-    getListProducts(session: string){
+    getListProducts(session: string | undefined){
         return this.http.get(`${this.url}getListProducts/${session}`);
     }
 
@@ -47,6 +47,11 @@ export  class BacketServices {
     getTotalPrice(getPrice: GetPrice){
         const  headers: HttpHeaders = new HttpHeaders();
         return this.http.post(`${this.url}getTotalPrice`,  getPrice, {headers } );
+    }
+
+    getGift(session: string|undefined){
+        const  headers: HttpHeaders = new HttpHeaders();
+        return this.http.get(`${this.url}getGift/${session}`,  {headers } );
     }
 
 }

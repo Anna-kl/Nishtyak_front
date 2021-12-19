@@ -70,42 +70,42 @@
 <!--    </div>-->
 <!--</div>-->
 
-<div class="about-area" style="background: url(assets/img/fon.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;">>
-    <div class="about-shape">
-        <img src="assets/img/home-two/about3.png" alt="Shape">
-        <img src="assets/img/home-two/about4.png" alt="Shape">
-        <img src="assets/img/home-two/about5.png" alt="Shape">
-        <img src="assets/img/home-two/about6.png" alt="Shape">
-        <img src="assets/img/home-two/about7.png" alt="Shape">
-    </div>
-
-<!--    <div class="container-fluid p-0">-->
-<!--        <div class="row m-0 align-items-center">-->
-<!--            <div class="col-lg-6 p-0">-->
-<!--                <div class="about-img">-->
-<!--                    <img src="assets/img/home-two/about1.png" alt="About">-->
-<!--                    <img src="assets/img/work.jpg" alt="О нас">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--                <div class="about-content">-->
-<!--                    <div class="section-title">-->
-<!--                        <span class="sub-title">О Нас</span>-->
-<!--                        <h2>Я готовлю суши уже более 10 лет</h2>-->
-<!--                        <p>За это время, я поработал в разных категориях ресторанов и доставок</p>-->
-<!--                        <p>Перенял опыт классных шефов. И сегодня я хочу сделать праздник для Вашего желудка и глаз</p>-->
-<!--                    </div>-->
-<!--&lt;!&ndash;                    <a class="cmn-btn" routerLink="/services-details">Узнать больше</a>&ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+<!--<div class="about-area" style="background: url(assets/img/fon.jpg) no-repeat center center fixed;-->
+<!--        -webkit-background-size: cover;-->
+<!--        -moz-background-size: cover;-->
+<!--        -o-background-size: cover;-->
+<!--        background-size: cover;">>-->
+<!--    <div class="about-shape">-->
+<!--        <img src="assets/img/home-two/about3.png" alt="Shape">-->
+<!--        <img src="assets/img/home-two/about4.png" alt="Shape">-->
+<!--        <img src="assets/img/home-two/about5.png" alt="Shape">-->
+<!--        <img src="assets/img/home-two/about6.png" alt="Shape">-->
+<!--        <img src="assets/img/home-two/about7.png" alt="Shape">-->
 <!--    </div>-->
-</div>
+
+<!--&lt;!&ndash;    <div class="container-fluid p-0">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="row m-0 align-items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="col-lg-6 p-0">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="about-img">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img src="assets/img/home-two/about1.png" alt="About">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img src="assets/img/work.jpg" alt="О нас">&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <div class="col-lg-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="about-content">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="section-title">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span class="sub-title">О Нас</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h2>Я готовлю суши уже более 10 лет</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <p>За это время, я поработал в разных категориях ресторанов и доставок</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <p>Перенял опыт классных шефов. И сегодня я хочу сделать праздник для Вашего желудка и глаз</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    <a class="cmn-btn" routerLink="/services-details">Узнать больше</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--</div>-->
 
 <section class="services-area services-area-two ptb-100" style="background: url(assets/img/fon.jpg);  background-size: 100% auto;">>
     <div class="container">
@@ -154,11 +154,49 @@
     </div>
 </section>
 
+<section class="download-area pt-100 pb-70" *ngIf="winner.length !== 0" style="background: url(assets/img/fon.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="download-content">
+                    <div class="section-title">
+                        <span class="sub-title">Наши победители</span>
+                        <h2>Каждую среду мы разыгрываем сет ходовой и призы по 300 и 200 бонусов на счет</h2>
+                        <p class="sub-title">Розыгрыш проводится среди наших клиентов, кто сделал заказ на сайте за последний месяц</p>
+                        <p class="sub-title">Чем больше заказов - тем больше шансов!!!</p>
+                    </div>
+<h3 class="card-title">Дата розыгрыша - {{winner[0].createAt| date}}</h3>
+                    <ul>
+                        <li><span>01</span> {{winner[0].phone}}</li>
+                        <li><span>02</span> {{winner[1].phone}}</li>
+                        <li><span>03</span> {{winner[2].phone}}</li>
+                    </ul>
+
+<!--                    <div class="app-wrap">-->
+<!--                        <a href="#"><img src="assets/img/home-two/google-store.png" alt="Google"></a>-->
+<!--                        <a href="#"><img src="assets/img/home-two/app-store.png" alt="App"></a>-->
+<!--                    </div>-->
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="download-img">
+                    <img src="assets/img/menu/sets/ходовой.jpg" alt="Download">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="collection-area collection-area-two ptb-100" style="background: url(assets/img/fon.jpg) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
-        background-size: cover;">>
+        background-size: cover;">
     <div class="container">
         <div class="section-title">
             <h2>НАШЕ МЕНЮ</h2>
@@ -175,6 +213,7 @@
                 <li class="filter" (click)="setProduct('soup')">Супы</li>
                 <li class="filter" (click)="setProduct('wok')">Wok</li>
                 <li class="filter" (click)="setProduct('sauce')">Соусы</li>
+                <li class="filter" (click)="setProduct('desert')">Десерты</li>
                 <li class="filter" (click)="setProduct('drink')">Напитки</li>
             </ul>
         </div>
@@ -196,7 +235,7 @@
                     </div>
 
                     <div class="collection-bottom">
-                     <div>   <h3>{{product.name}}</h3>   <span style="color:#c3a2a2" *ngIf="product.tag==='pizza'">{{product.quantity}} см</span></div>
+                     <div>   <h3>{{product.name}}</h3>  </div>
                         <span class="text-body" style="white-space: pre-wrap">{{product.structure}}</span>
                         <ul>
                             <li><span>{{product.price}}</span>
@@ -238,38 +277,7 @@
     </div>
 </section>
 
-<!--<section class="download-area pt-100 pb-70">-->
-<!--    <div class="container">-->
-<!--        <div class="row align-items-center">-->
-<!--            <div class="col-lg-6">-->
-<!--                <div class="download-content">-->
-<!--                    <div class="section-title">-->
-<!--                        <span class="sub-title">Download</span>-->
-<!--                        <h2>Download Our Mobile App That Make You More Easy to Order</h2>-->
-<!--                        <p>Restaurants range from inexpensive and informal lunching or dining places catering to people working nearby, with modest food served in simple settings at low prices.</p>-->
-<!--                    </div>-->
 
-<!--                    <ul>-->
-<!--                        <li><span>01</span> Select Your Food</li>-->
-<!--                        <li><span>02</span> Add to Cart</li>-->
-<!--                        <li><span>03</span> Order Your Food</li>-->
-<!--                    </ul>-->
-
-<!--                    <div class="app-wrap">-->
-<!--                        <a href="#"><img src="assets/img/home-two/google-store.png" alt="Google"></a>-->
-<!--                        <a href="#"><img src="assets/img/home-two/app-store.png" alt="App"></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--                <div class="download-img">-->
-<!--                    <img src="assets/img/home-two/download1.png" alt="Download">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
 
 <!--<div class="join-area">-->
 <!--    <div class="container">-->

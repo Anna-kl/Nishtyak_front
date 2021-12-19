@@ -13,17 +13,20 @@ import {ProductWithCount} from '../../classes/ProductWithCount';
 import {AnswerOrder} from '../../classes/AnswerOrder';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ChooseOptionalComponent} from '../../modals/choose-optional/choose-optional.component';
+import {RaffleServices} from '../../services/raffle.service';
+import {IWinner} from '../../classes/IWinner';
 
 @Component({
   selector: 'app-home-two',
   templateUrl: './home-two.component.html',
   styleUrls: ['./home-two.component.scss'],
-  providers: [ProductServices, CookieService, Md5, BacketServices]
+  providers: [ProductServices, CookieService, Md5, BacketServices, RaffleServices]
 })
 export class HomeTwoComponent implements OnInit {
     public typeProduct = 'rolls';
     public backet: Backet|undefined = undefined;
     public orderCount = 0;
+    public winner: IWinner[] = [];
     private session = '';
     @ViewChild('navMenu') myForm: ComponentRef<any> | undefined;
     private idBacket = 0;
@@ -31,7 +34,8 @@ export class HomeTwoComponent implements OnInit {
   constructor(private productService: ProductServices,
               private cookieService: CookieService,
               private md5: Md5, private backetService: BacketServices,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private raffleService: RaffleServices) { }
 
   public products: ProductWithCount[] = [];
   public countProduct = 1;
@@ -41,6 +45,16 @@ export class HomeTwoComponent implements OnInit {
           this.Success();
           this.cookieService.set('nishtyak_first', 'no');
       }
+      this.raffleService.getLastGift().subscribe(
+          (result: any) => {
+              if (result.code === 200){
+this.winner = result.data as IWinner[];
+this.winner.forEach(item => {
+    item.phone = '+7(' + item.phone.substr(3, 3) + ')***' + item.phone.substr(10, 4);
+});
+              }
+          }
+      );
       this.productService.getProducts().
           subscribe((result: any) => {
                 this.products = result.data as ProductWithCount[];
@@ -83,6 +97,7 @@ export class HomeTwoComponent implements OnInit {
                     const modalRef = this.modalService.open(ChooseOptionalComponent);
                     modalRef.componentInstance.id = product.id;
                     modalRef.componentInstance.count = product.count;
+                    modalRef.componentInstance.setter = 'product';
                     modalRef.componentInstance.passEntry.subscribe((receivedEntry: any[]) => {
                         receivedEntry.forEach(item => {
                             this.createOrder(item, false);

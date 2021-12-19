@@ -29,10 +29,13 @@ export  class ProductServices {
         return this.http.get(`${this.url}stock`);
     }
 
-
-
     addProductInBacket(order: Order){
         const  headers: HttpHeaders = new HttpHeaders();
         return this.http.post(this.url + 'order',  order, {headers } );
+    }
+
+    addGiftInBacket(order: Order){
+        const  headers: HttpHeaders = new HttpHeaders();
+        return this.http.post(this.url + 'addgift',  order, {headers } );
     }
 }

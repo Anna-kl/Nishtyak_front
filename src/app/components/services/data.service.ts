@@ -32,7 +32,7 @@ export class DataServices {
         this.id.next(id);
     }
 
-    sendPriceBacket(price: number){
+    sendPriceBacket(price: number|undefined){
         this.price.next(price);
     }
 
